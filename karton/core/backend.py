@@ -288,7 +288,7 @@ class KartonBackend:
         taskmap = {
             f"{KARTON_TASK_NAMESPACE}:{task.uid}": task.serialize() for task in tasks
         }
-        self.redis.mset(taskmap)
+        self.redis.mset(taskmap
 
     def set_task_status(
         self, task: Task, status: TaskState, pipe: Optional[Pipeline] = None
@@ -656,7 +656,7 @@ class KartonBackend:
         """
 
         self.redis.sadd(f"{KARTON_OUTPUTS_NAMESPACE}:{identity}", json.dumps(headers))
-        self.redis.expire(f"{KARTON_OUTPUTS_NAMESPACE}:{identity}", 60 * 60)
+        self.redis.expire(f"{KARTON_OUTPUTS_NAMESPACE}:{identity}", 60 * 60 * 24 * 30)
 
     def get_outputs(self) -> List[KartonOutputs]:
         """
